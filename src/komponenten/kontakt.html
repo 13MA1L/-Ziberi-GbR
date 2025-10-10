@@ -9,19 +9,25 @@
     <script defer src="../script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: block;
+        }
+
+        input.error,
+        textarea.error {
+            border-color: red;
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+        }
+    </style>
 </head>
 
 <body>
     <div class="page-wrapper">
-
-        <div id="cookie-banner" class="cookie-banner">
-            <p>
-                Diese Website verwendet Cookies und Dienste von Drittanbietern (z. B. Google Maps), um Ihnen ein
-                optimales Erlebnis zu bieten.
-                <a href="datenschutz.html" target="_blank">Mehr erfahren</a>.
-            </p>
-            <button id="accept-cookies" class="btn-primary small">Akzeptieren</button>
-        </div>
 
         <nav class="navbar">
             <div class="container">
@@ -38,46 +44,72 @@
         </nav>
 
         <main class="main-content">
-            <form action="https://formspree.io/f/DEIN_FORMULAR_LINK" method="POST" class="form-box">
-
-                <h3>Besichtigung</h3>
-
-                <div class="form-group">
-                    <label for="ort">Ort</label>
-                    <input type="text" name="Ort" id="ort" required placeholder="z. B. Oberhausen" />
-                </div>
-
-                <div class="form-group">
-                    <label for="plz">Postleitzahl</label>
-                    <input type="text" name="Postleitzahl" id="plz" required placeholder="z. B. 46045" />
-                </div>
-
-                <div class="form-group">
-                    <label for="adresse">Adresse</label>
-                    <input type="text" name="Adresse" id="adresse" required placeholder="Straße + Hausnummer" />
-                </div>
-
-                <div class="form-group">
-                    <label for="beschreibung">Beschreibung</label>
-                    <textarea name="Beschreibung" id="beschreibung" rows="4" required
-                        placeholder="Kurze Beschreibung..."></textarea>
-                </div>
+            <form action="https://formspree.io/f/myznnpyy" method="POST" class="form-box" novalidate>
 
                 <h3>Ihre Daten</h3>
 
                 <div class="form-group">
-                    <label for="vorname">Vorname</label>
-                    <input type="text" name="Vorname" id="vorname" required placeholder="z.B. Max" />
+                    <label for="email">E-Mail*
+                        <input type="email" name="E-Mail" id="email" required placeholder="beispiel@mail.de" />
+                    </label>
+                    <span class="error-message" id="error-email"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="nachname">Nachname</label>
-                    <input type="text" name="Nachname" id="nachname" required placeholder="z.B. Mustermann" />
+                    <label for="vorname">Vorname*
+                        <input type="text" name="Vorname" id="vorname" required placeholder="z.B. Max" />
+                    </label>
+                    <span class="error-message" id="error-vorname"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-Mail</label>
-                    <input type="email" name="E-Mail" id="email" required placeholder="beispiel@mail.de" />
+                    <label for="nachname">Nachname*
+                        <input type="text" name="Nachname" id="nachname" required placeholder="z.B. Mustermann" />
+                    </label>
+                    <span class="error-message" id="error-nachname"></span>
+                </div>
+
+                <h3>Besichtigung</h3>
+
+                <div class="form-group">
+                    <label for="ort">Ort*
+                        <input type="text" name="Ort" id="ort" required placeholder="z.B. Oberhausen" />
+                    </label>
+                    <span class="error-message" id="error-ort"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="plz">Postleitzahl*
+                        <input type="text" name="Postleitzahl" id="plz" required placeholder="z.B. 46045" />
+
+                    </label>
+                    <span class="error-message" id="error-plz"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">Adresse*
+                        <input type="text" name="Adresse" id="adresse" required placeholder="Straße + Hausnummer" />
+                    </label>
+                    <span class="error-message" id="error-adresse"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="beschreibung">Beschreibung*
+                        <textarea name="Beschreibung" id="beschreibung" rows="4" required
+                            placeholder="Kurze Beschreibung..."></textarea>
+                    </label>
+                    <span class="error-message" id="error-beschreibung"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="datenschutz" name="Datenschutz" required>
+                        <span class="checkbox-text">
+                            Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und
+                            akzeptiere sie.
+                        </span>
+                    </label>
+                    <span class="error-message" id="error-datenschutz"></span>
                 </div>
 
                 <button type="submit" class="btn-primary1">Absenden</button>
@@ -92,8 +124,8 @@
                 <a href="datenschutz.html">Datenschutz</a>
             </p>
         </footer>
-
     </div>
+
 </body>
 
 </html>

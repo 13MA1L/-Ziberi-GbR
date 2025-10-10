@@ -97,6 +97,10 @@ a:hover {
         display: block;
     }
 
+    .Datenschutz-title {
+        font-size: medium;
+    }
+
     .nav-links {
         display: none;
         flex-direction: column;
@@ -180,6 +184,23 @@ a:hover {
     box-shadow: 0 8px 20px rgba(0, 119, 204, 0.4);
     color: #fff;
 }
+
+.btn-primary-small {
+    background: linear-gradient(135deg, #0077cc, #005fa3);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary-small:hover {
+    box-shadow: 0 8px 20px rgba(0, 119, 204, 0.4);
+    color: #fff;
+}
+
 
 section {
     padding: 4rem 2rem;
@@ -423,7 +444,6 @@ section {
     scroll-margin-top: 100px;
 }
 
-/* =============== Modernes, responsives Kontaktformular =============== */
 
 .form-box {
     background: #ffffff;
@@ -513,4 +533,51 @@ section {
         width: 100%;
         text-align: center;
     }
+}
+
+.custom-checkbox input[type="checkbox"] {
+    appearance: checkbox;
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    width: auto;
+    height: auto;
+}
+
+.custom-checkbox .checkbox-text a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.custom-checkbox .checkbox-text a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .custom-checkbox {
+        align-items: center;
+    }
+
+    .custom-checkbox input[type="checkbox"] {
+        width: 12px;
+        height: 12px;
+        margin-top: 0;
+    }
+
+    .custom-checkbox input[type="checkbox"]::before {
+        width: 4px;
+        height: 6px;
+    }
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+input.error,
+textarea.error {
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
