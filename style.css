@@ -567,6 +567,9 @@ section {
         width: 4px;
         height: 6px;
     }
+    .Datenschutz{
+        font-size: x-large;
+    }
 }
 
 .error-message {
