@@ -36,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
+    // =========================
+    // Formular + Upload
+    // =========================
     const form = document.querySelector("form");
     if (!form) return;
 
@@ -46,8 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const preview = document.getElementById("image-preview");
     const errorBilder = document.getElementById("error-bilder");
 
+    // ✅ NEU: 10 Bilder, aber Gesamt max 5120 KB
     const MAX_FILES = 10;
-    const MAX_TOTAL_KB = 5120;
+    const MAX_TOTAL_KB = 5120; // 5MB total (alle zusammen)
+    // Optional: wenn du zusätzlich pro Bild limitieren willst, setz das hier:
+    // const MAX_FILE_KB = 5120;
 
     const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
     let selectedFiles = [];
@@ -101,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setFileError("");
             });
 
-
+            // ✅ Badge pro Bild: Dateigröße / Gesamtlimit
             const badge = document.createElement("div");
             badge.className = "preview-size-badge";
             badge.textContent = `${fmtKB(bytesToKB(file.size))} / ${fmtKB(MAX_TOTAL_KB)} KB`;
@@ -127,12 +132,17 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Typen prüfen
         for (const f of incoming) {
             if (!ALLOWED_TYPES.has(f.type)) {
                 setFileError("Nur JPG, PNG oder WebP sind erlaubt.");
                 return;
             }
-
+            // Optionales per-Bild Limit:
+            // if (bytesToKB(f.size) > MAX_FILE_KB) {
+            //   setFileError(`Ein Bild ist zu groß. Maximal ${fmtKB(MAX_FILE_KB)} KB pro Bild.`);
+            //   return;
+            // }
         }
 
         // Duplikate vermeiden

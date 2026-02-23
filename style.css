@@ -1,3 +1,6 @@
+/* =========================
+   RESET & BASIS
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -9,13 +12,12 @@ body {
     height: 100%;
     max-width: 100%;
     overflow-x: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: #f9f9f9;
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth;
 }
-
 
 a {
     color: #0077cc;
@@ -27,7 +29,9 @@ a:hover {
     color: #005fa3;
 }
 
-
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
     background: #fff;
     padding: 1rem 2rem;
@@ -38,7 +42,6 @@ a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
-
 
 .navbar .container {
     display: flex;
@@ -70,7 +73,7 @@ a:hover {
 }
 
 .nav-links li a::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
@@ -83,7 +86,6 @@ a:hover {
 .nav-links li a:hover::after {
     width: 100%;
 }
-
 
 .menu-toggle {
     display: none;
@@ -133,10 +135,14 @@ a:hover {
     }
 }
 
-
+/* =========================
+   HERO
+========================= */
 .hero {
     background: #000000;
-    background: linear-gradient(95deg, rgba(0, 0, 0, 1) 0%, rgba(9, 9, 121, 1) 100%);
+    background: linear-gradient(95deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(9, 9, 121, 1) 100%);
     color: white;
     padding: 6rem 2rem;
     text-align: center;
@@ -166,7 +172,9 @@ a:hover {
     margin-bottom: 2rem;
 }
 
-
+/* =========================
+   BUTTONS
+========================= */
 .btn-primary {
     background: linear-gradient(135deg, #0077cc, #005fa3);
     color: white;
@@ -201,7 +209,9 @@ a:hover {
     color: #fff;
 }
 
-
+/* =========================
+   SECTIONS / CARDS
+========================= */
 section {
     padding: 4rem 2rem;
     max-width: 1000px;
@@ -213,7 +223,6 @@ h2 {
     text-align: center;
     margin-bottom: 2rem;
 }
-
 
 .cards,
 .service-boxes {
@@ -247,7 +256,6 @@ h2 {
     margin-bottom: 1rem;
 }
 
-
 .map-container {
     margin-top: 2rem;
     width: 100%;
@@ -262,7 +270,6 @@ h2 {
     height: 100%;
     border: none;
 }
-
 
 .visitenkarte {
     text-align: center;
@@ -280,8 +287,13 @@ h2 {
     transform: scale(1.03);
 }
 
+/* =========================
+   FOOTER
+========================= */
 .footer {
-    background: linear-gradient(95deg, rgba(0, 0, 0, 1) 0%, rgba(9, 9, 121, 1) 100%);
+    background: linear-gradient(95deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(9, 9, 121, 1) 100%);
     color: white;
     text-align: center;
     padding: 2rem 1rem;
@@ -297,7 +309,9 @@ h2 {
     text-decoration: underline;
 }
 
-
+/* =========================
+   SCROLL ANIMATION
+========================= */
 .hidden {
     opacity: 0;
     transform: translateY(30px);
@@ -309,7 +323,9 @@ h2 {
     transform: translateY(0);
 }
 
-
+/* =========================
+   RESPONSIVE HERO
+========================= */
 @media (max-width: 600px) {
     .hero h1 {
         font-size: 2rem;
@@ -337,7 +353,9 @@ h2 {
     }
 }
 
-
+/* =========================
+   FORM (GENERAL)
+========================= */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -366,7 +384,9 @@ h2 {
     outline: none;
 }
 
-
+/* =========================
+   COOKIE BANNER
+========================= */
 .cookie-banner {
     position: fixed;
     bottom: 0;
@@ -394,6 +414,9 @@ h2 {
     text-decoration: underline;
 }
 
+/* =========================
+   LAYOUT WRAPPER
+========================= */
 .page-wrapper {
     display: flex;
     flex-direction: column;
@@ -413,7 +436,9 @@ h2 {
     }
 }
 
-
+/* =========================
+   TEXT BOX
+========================= */
 .text-box {
     background: #fff;
     padding: 2rem;
@@ -444,7 +469,9 @@ section {
     scroll-margin-top: 100px;
 }
 
-
+/* =========================
+   FORM BOX
+========================= */
 .form-box {
     background: #ffffff;
     border-radius: 12px;
@@ -455,8 +482,6 @@ section {
     margin: 0 auto;
     box-sizing: border-box;
 }
-
-
 
 .form-box h3 {
     margin-top: 2.5rem;
@@ -469,7 +494,6 @@ section {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 0.5rem;
 }
-
 
 .form-group {
     display: flex;
@@ -502,7 +526,9 @@ section {
     outline: none;
 }
 
-
+/* =========================
+   BUTTON PRIMARY (FORM)
+========================= */
 .btn-primary1 {
     background: linear-gradient(135deg, #0077cc, #005fa3);
     color: white;
@@ -535,6 +561,9 @@ section {
     }
 }
 
+/* =========================
+   CUSTOM CHECKBOX
+========================= */
 .custom-checkbox input[type="checkbox"] {
     appearance: checkbox;
     -webkit-appearance: checkbox;
@@ -567,12 +596,11 @@ section {
         width: 4px;
         height: 6px;
     }
-
-    .Datenschutz {
-        font-size: x-large;
-    }
 }
 
+/* =========================
+   ERRORS
+========================= */
 .error-message {
     color: red;
     font-size: 0.85rem;
@@ -585,8 +613,6 @@ textarea.error {
     border-color: red;
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
-
-<<<<<<< HEAD
 
 /* ===== Upload Zone (Drag & Drop) ===== */
 .upload-zone {
@@ -714,10 +740,4 @@ textarea.error {
 input[type="file"].error {
     border-color: red;
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-
-    =======.footer .credits {
-        font-size: 0.8rem;
-        color: #999;
-        margin-top: 0.5em;
-        >>>>>>>d1cdb537187acc5c51e8c157a56cc3d75f2329f1
-    }
+}
