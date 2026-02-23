@@ -1,249 +1,201 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // =========================
+    // Navigation / Animationen
+    // =========================
     const sections = document.querySelectorAll("section");
-    const navbar = document.querySelector(".navbar");
     const mobileBtn = document.getElementById("mobile-menu");
     const navLinks = document.getElementById("nav-links");
-    const navLinksAll = navLinks.querySelectorAll("a");
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            entry.target.classList.toggle("visible", entry.isIntersecting);
-        });
-    }, {
-        threshold: 0.1
-    });
+    if (sections.length) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    entry.target.classList.toggle("visible", entry.isIntersecting);
+                });
+            },
+            { threshold: 0.1 }
+        );
 
-    sections.forEach(section => {
-        section.classList.add("hidden");
-        observer.observe(section);
-    });
-
-    mobileBtn.addEventListener("click", () => {
-        navLinks.classList.toggle("show");
-    });
-
-    navLinksAll.forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("show");
-        });
-    });
-
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            button.classList.add("clicked");
-            setTimeout(() => {
-                button.classList.remove("clicked");
-            }, 300);
-        });
-    });
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-    const cookieBanner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (cookieBanner && acceptBtn) {
-        const hasAccepted = localStorage.getItem("cookiesAccepted") === "true";
-
-        if (!hasAccepted) {
-            cookieBanner.style.display = "flex";
-        } else {
-            cookieBanner.style.display = "none";
-        }
-
-        acceptBtn.addEventListener("click", () => {
-            localStorage.setItem("cookiesAccepted", "true");
-            cookieBanner.style.display = "none";
+        sections.forEach((section) => {
+            section.classList.add("hidden");
+            observer.observe(section);
         });
     }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener("click", () => navLinks.classList.toggle("show"));
+        navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => navLinks.classList.remove("show"));
+        });
+    }
 
-    form.addEventListener("submit", function (e) {
-        let valid = true;
-
-        const showError = (id, message) => {
-            const input = document.getElementById(id);
-            const error = document.getElementById("error-" + id);
-            input.classList.add("error");
-            error.textContent = message;
-        };
-
-        const clearError = (id) => {
-            const input = document.getElementById(id);
-            const error = document.getElementById("error-" + id);
-            input.classList.remove("error");
-            error.textContent = "";
-        };
-
-        // Regex-Muster
-        const namePattern = /^[A-Za-zÀ-ÿäöüÄÖÜß\-'\s]+$/;
-        const addressPattern = /[A-Za-zÀ-ÿäöüÄÖÜß\s]+\s+\d+/;
-        const plzPattern = /^\d{4,6}$/; // nur Zahlen, mind. 4–6 Stellen
-
-        // Felder holen
-        const email = document.getElementById("email");
-        const vorname = document.getElementById("vorname");
-        const nachname = document.getElementById("nachname");
-        const ort = document.getElementById("ort");
-        const plz = document.getElementById("plz");
-        const adresse = document.getElementById("adresse");
-        const beschreibung = document.getElementById("beschreibung");
-        const datenschutz = document.getElementById("datenschutz");
-
-        // E-Mail
-        if (!email.value.trim()) {
-            showError("email", "E-Mail ist erforderlich.");
-            valid = false;
-        } else {
-            clearError("email");
-        }
-
-        // Vorname
-        if (!vorname.value.trim() || !namePattern.test(vorname.value)) {
-            showError("vorname", "Nur Buchstaben erlaubt (inkl. é, ä, ü, ...).");
-            valid = false;
-        } else {
-            clearError("vorname");
-        }
-
-        // Nachname
-        if (!nachname.value.trim() || !namePattern.test(nachname.value)) {
-            showError("nachname", "Nur Buchstaben erlaubt (inkl. é, ä, ü, ...).");
-            valid = false;
-        } else {
-            clearError("nachname");
-        }
-
-        // Ort
-        if (!ort.value.trim() || !namePattern.test(ort.value)) {
-            showError("ort", "Nur Buchstaben erlaubt.");
-            valid = false;
-        } else {
-            clearError("ort");
-        }
-
-        // Postleitzahl (nur Zahlen)
-        if (!plz.value.trim() || !plzPattern.test(plz.value)) {
-            showError("plz", "Nur Zahlen erlaubt (z. B. 46045).");
-            valid = false;
-        } else {
-            clearError("plz");
-        }
-
-        // Adresse (muss Zahl enthalten)
-        if (!adresse.value.trim() || !addressPattern.test(adresse.value)) {
-            showError("adresse", "Adresse muss Straße und Hausnummer enthalten.");
-            valid = false;
-        } else {
-            clearError("adresse");
-        }
-
-        // Beschreibung
-        if (!beschreibung.value.trim()) {
-            showError("beschreibung", "Beschreibung darf nicht leer sein.");
-            valid = false;
-        } else {
-            clearError("beschreibung");
-        }
-
-        // Datenschutz (Pflicht)
-        const errorDatenschutz = document.getElementById("error-datenschutz");
-        if (!datenschutz.checked) {
-            datenschutz.classList.add("error");
-            errorDatenschutz.textContent = "Bitte Datenschutzrichtlinien akzeptieren.";
-            valid = false;
-        } else {
-            datenschutz.classList.remove("error");
-            errorDatenschutz.textContent = "";
-        }
-
-        if (!valid) {
-            e.preventDefault(); // Formular nicht absenden
-        }
+    document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+            button.classList.add("clicked");
+            setTimeout(() => button.classList.remove("clicked"), 300);
+        });
     });
-});
 
 
-document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
+    if (!form) return;
 
-    form.addEventListener("submit", function (e) {
-        let valid = true;
+    const fileInput = document.getElementById("bilder");
+    const uploadZone = document.getElementById("upload-zone");
+    const uploadStatus = document.getElementById("upload-status");
+    const preview = document.getElementById("image-preview");
+    const errorBilder = document.getElementById("error-bilder");
 
-        const showError = (id, message) => {
-            const input = document.getElementById(id);
-            const error = document.getElementById("error-" + id);
-            input.classList.add("error");
-            error.textContent = message;
-        };
+    const MAX_FILES = 10;
+    const MAX_TOTAL_KB = 5120;
 
-        const clearError = (id) => {
-            const input = document.getElementById(id);
-            const error = document.getElementById("error-" + id);
-            input.classList.remove("error");
-            error.textContent = "";
-        };
+    const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+    let selectedFiles = [];
 
-        // Regex-Muster
-        const namePattern = /^[A-Za-zÀ-ÿäöüÄÖÜß\-'\s]+$/;
-        const addressPattern = /[A-Za-zÀ-ÿäöüÄÖÜß\s]+\s+\d+/;
-        const plzPattern = /^\d{4,6}$/;
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const bytesToKB = (bytes) => bytes / 1024;
+    const fmtKB = (kb) => Math.round(kb);
 
-        const fields = [
-            { id: "email", type: "email" },
-            { id: "vorname", type: "name" },
-            { id: "nachname", type: "name" },
-            { id: "ort", type: "name" },
-            { id: "plz", type: "plz" },
-            { id: "adresse", type: "adresse" },
-            { id: "beschreibung", type: "text" }
-        ];
+    const setFileError = (msg) => {
+        if (!errorBilder) return;
+        errorBilder.textContent = msg || "";
+        if (fileInput) {
+            if (msg) fileInput.classList.add("error");
+            else fileInput.classList.remove("error");
+        }
+    };
 
-        fields.forEach(field => {
-            const input = document.getElementById(field.id);
-            const value = input.value.trim();
+    const totalKB = () => selectedFiles.reduce((sum, f) => sum + bytesToKB(f.size), 0);
 
-            if (!value) {
-                showError(field.id, "Feld darf nicht leer sein.");
-                valid = false;
+    const syncInputFiles = () => {
+        if (!fileInput) return;
+        const dt = new DataTransfer();
+        selectedFiles.forEach((f) => dt.items.add(f));
+        fileInput.files = dt.files;
+    };
+
+    const updateStatus = () => {
+        if (!uploadStatus) return;
+        uploadStatus.textContent = `${fmtKB(totalKB())} / ${fmtKB(MAX_TOTAL_KB)} KB · ${selectedFiles.length}/${MAX_FILES} Bilder`;
+    };
+
+    const renderPreview = () => {
+        if (!preview) return;
+        preview.innerHTML = "";
+
+        selectedFiles.forEach((file, index) => {
+            const card = document.createElement("div");
+            card.className = "preview-card";
+
+            const img = document.createElement("img");
+            img.alt = "Vorschau Bild";
+
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "preview-remove";
+            removeBtn.innerHTML = "&times;";
+            removeBtn.addEventListener("click", () => {
+                selectedFiles.splice(index, 1);
+                syncInputFiles();
+                renderPreview();
+                updateStatus();
+                setFileError("");
+            });
+
+
+            const badge = document.createElement("div");
+            badge.className = "preview-size-badge";
+            badge.textContent = `${fmtKB(bytesToKB(file.size))} / ${fmtKB(MAX_TOTAL_KB)} KB`;
+
+            card.appendChild(img);
+            card.appendChild(removeBtn);
+            card.appendChild(badge);
+            preview.appendChild(card);
+
+            const reader = new FileReader();
+            reader.onload = (e) => (img.src = e.target.result);
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const validateAndAddFiles = (files) => {
+        setFileError("");
+        const incoming = Array.from(files || []);
+        if (incoming.length === 0) return;
+
+        if (selectedFiles.length + incoming.length > MAX_FILES) {
+            setFileError(`Maximal ${MAX_FILES} Bilder erlaubt.`);
+            return;
+        }
+
+        for (const f of incoming) {
+            if (!ALLOWED_TYPES.has(f.type)) {
+                setFileError("Nur JPG, PNG oder WebP sind erlaubt.");
                 return;
             }
 
-            if (field.type === "name" && !namePattern.test(value)) {
-                showError(field.id, "Nur Buchstaben erlaubt (inkl. é, ä, ü, ß...).");
-                valid = false;
-            } else if (field.type === "plz" && !plzPattern.test(value)) {
-                showError(field.id, "Nur Zahlen erlaubt (4–6 Stellen).");
-                valid = false;
-            } else if (field.type === "adresse" && !addressPattern.test(value)) {
-                showError(field.id, "Adresse muss Straße und Hausnummer enthalten.");
-                valid = false;
-            } else if (field.type === "email" && !emailPattern.test(value)) {
-                showError(field.id, "Bitte eine gültige E-Mail-Adresse eingeben.");
-                valid = false;
-            } else {
-                clearError(field.id);
-            }
+        }
+
+        // Duplikate vermeiden
+        const key = (f) => `${f.name}_${f.size}_${f.type}`;
+        const existing = new Set(selectedFiles.map(key));
+        const filtered = incoming.filter((f) => !existing.has(key(f)));
+
+        // ✅ Gesamtlimit prüfen
+        const incomingKB = filtered.reduce((sum, f) => sum + bytesToKB(f.size), 0);
+        const newTotal = totalKB() + incomingKB;
+
+        if (newTotal > MAX_TOTAL_KB) {
+            setFileError(`Gesamtgröße zu groß. Maximal ${fmtKB(MAX_TOTAL_KB)} KB insgesamt erlaubt.`);
+            return;
+        }
+
+        selectedFiles = selectedFiles.concat(filtered);
+
+        syncInputFiles();
+        renderPreview();
+        updateStatus();
+
+        if (fileInput) fileInput.value = "";
+    };
+
+    // Klick-Auswahl
+    if (fileInput) {
+        fileInput.addEventListener("change", () => validateAndAddFiles(fileInput.files));
+    }
+
+    // Drag & Drop
+    if (uploadZone) {
+        const prevent = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        };
+
+        ["dragenter", "dragover"].forEach((evt) => {
+            uploadZone.addEventListener(evt, (e) => {
+                prevent(e);
+                uploadZone.classList.add("dragover");
+            });
         });
 
-        // Datenschutz prüfen
-        const datenschutz = document.getElementById("datenschutz");
-        const errorDatenschutz = document.getElementById("error-datenschutz");
-        if (!datenschutz.checked) {
-            datenschutz.classList.add("error");
-            errorDatenschutz.textContent = "Bitte Datenschutzrichtlinien akzeptieren.";
-            valid = false;
-        } else {
-            datenschutz.classList.remove("error");
-            errorDatenschutz.textContent = "";
-        }
+        ["dragleave", "drop"].forEach((evt) => {
+            uploadZone.addEventListener(evt, (e) => {
+                prevent(e);
+                uploadZone.classList.remove("dragover");
+            });
+        });
 
-        if (!valid) {
-            e.preventDefault(); // blockiere Absenden
-        }
-    });
+        uploadZone.addEventListener("drop", (e) => {
+            const dt = e.dataTransfer;
+            if (dt && dt.files) validateAndAddFiles(dt.files);
+        });
+
+        uploadZone.addEventListener("keydown", (e) => {
+            if ((e.key === "Enter" || e.key === " ") && fileInput) {
+                e.preventDefault();
+                fileInput.click();
+            }
+        });
+    }
+
+    updateStatus();
 });

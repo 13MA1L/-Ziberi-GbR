@@ -581,3 +581,131 @@ textarea.error {
     border-color: red;
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
+
+/* ===== Upload Zone (Drag & Drop) ===== */
+.upload-zone {
+    position: relative;
+    border: 2px dashed #bcd8f2;
+    background: #f7fbff;
+    border-radius: 14px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    outline: none;
+}
+
+.upload-zone:hover {
+    border-color: #0077cc;
+}
+
+.upload-zone:focus {
+    box-shadow: 0 0 0 4px rgba(0, 119, 204, 0.15);
+    border-color: #0077cc;
+}
+
+.upload-zone.dragover {
+    background: #eef7ff;
+    border-color: #0077cc;
+    box-shadow: 0 0 0 4px rgba(0, 119, 204, 0.12);
+}
+
+.upload-zone-inner {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.upload-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #0b3f66;
+}
+
+.upload-title i {
+    font-size: 1.2rem;
+    color: #0077cc;
+}
+
+.upload-sub {
+    font-size: 0.9rem;
+    color: #466077;
+}
+
+.upload-status {
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0b3f66;
+}
+
+/* Versteckt das native "Keine Datei ausgewählt" */
+.upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* ===== Preview Grid ===== */
+.image-preview {
+    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+.preview-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.preview-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ✅ Badge: "0.8 / 5 MB" */
+.preview-size-badge {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 0.25rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+}
+
+.preview-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.preview-remove:hover {
+    transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+input[type="file"].error {
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+}
