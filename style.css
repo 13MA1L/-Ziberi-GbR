@@ -43,6 +43,10 @@ a:hover {
     transition: all 0.3s ease;
 }
 
+.credits {
+    color: #7c7c7c;
+}
+
 .navbar .container {
     display: flex;
     justify-content: space-between;
