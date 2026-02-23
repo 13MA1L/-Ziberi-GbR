@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Fix: buttons war vorher nicht definiert
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -72,14 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const preview = document.getElementById("image-preview");
     const errorBilder = document.getElementById("error-bilder");
 
-    const MAX_FILES = 5;
-    const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+    const MAX_FILES = 10;                 // ✅ vorher 5
+    const MAX_SIZE = 5 * 1024 * 1024;     // 5MB (Limit bleibt gleich)
     const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
     let selectedFiles = [];
 
-    const bytesToMB = (bytes) => bytes / (1024 * 1024);
-    const fmtMB = (mb) => mb.toFixed(mb >= 10 ? 0 : 1);
+    // ✅ MB -> KB Umrechnung + Anzeige
+    const bytesToKB = (bytes) => bytes / 1024;
+    const fmtKB = (kb) => kb.toFixed(kb >= 1000 ? 0 : 1);
 
     const setFileError = (msg) => {
         if (!errorBilder) return;
@@ -99,8 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateStatus = () => {
         if (!uploadStatus) return;
-        const totalMB = selectedFiles.reduce((sum, f) => sum + bytesToMB(f.size), 0);
-        uploadStatus.textContent = `${fmtMB(totalMB)} / ${fmtMB(bytesToMB(MAX_SIZE))} MB · ${selectedFiles.length}/${MAX_FILES} Bilder`;
+        const totalKB = selectedFiles.reduce((sum, f) => sum + bytesToKB(f.size), 0);
+        uploadStatus.textContent =
+            `${fmtKB(totalKB)} / ${fmtKB(bytesToKB(MAX_SIZE))} KB · ${selectedFiles.length}/${MAX_FILES} Bilder`;
     };
 
     const renderPreview = () => {
@@ -127,11 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 setFileError("");
             });
 
-            // ✅ Badge: "0.8 / 5 MB" pro Bild
+            // ✅ Badge: "820.5 / 5120.0 KB" pro Bild (statt MB)
             const badge = document.createElement("div");
             badge.className = "preview-size-badge";
-            badge.textContent = `${fmtMB(bytesToMB(file.size))} / ${fmtMB(bytesToMB(MAX_SIZE))} MB`;
-
+            badge.textContent = `${fmtKB(bytesToKB(file.size))} KB`;
             card.appendChild(img);
             card.appendChild(removeBtn);
             card.appendChild(badge);
@@ -159,12 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             if (f.size > MAX_SIZE) {
-                setFileError(`Ein Bild ist zu groß. Maximal ${fmtMB(bytesToMB(MAX_SIZE))} MB pro Bild.`);
+                setFileError(
+                    `Ein Bild ist zu groß. Maximal ${fmtKB(bytesToKB(MAX_SIZE))} KB pro Bild.`
+                );
                 return;
             }
         }
 
-        // Duplikate vermeiden (Name+Size+Type)
         const key = (f) => `${f.name}__${f.size}__${f.type}`;
         const existing = new Set(selectedFiles.map(key));
         const filtered = incoming.filter((f) => !existing.has(key(f)));
@@ -174,18 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
         renderPreview();
         updateStatus();
 
-        // erlaubt erneute Auswahl derselben Datei
         if (fileInput) fileInput.value = "";
     };
 
-    // ✅ Change (Klick-Auswahl)
     if (fileInput) {
         fileInput.addEventListener("change", () => {
             validateAndAddFiles(fileInput.files);
         });
     }
 
-    // ✅ Drag & Drop
     if (uploadZone) {
         const prevent = (e) => {
             e.preventDefault();
@@ -211,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dt && dt.files) validateAndAddFiles(dt.files);
         });
 
-        // Enter/Space öffnet Dateiauswahl
         uploadZone.addEventListener("keydown", (e) => {
             if ((e.key === "Enter" || e.key === " ") && fileInput) {
                 e.preventDefault();
@@ -220,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // init status
     updateStatus();
 
     // =========================
@@ -299,7 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Upload nochmal checken (optional)
         if (selectedFiles.length > MAX_FILES) {
             setFileError(`Maximal ${MAX_FILES} Bilder erlaubt.`);
             valid = false;
@@ -311,7 +306,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
             }
             if (f.size > MAX_SIZE) {
-                setFileError(`Ein Bild ist zu groß. Maximal ${fmtMB(bytesToMB(MAX_SIZE))} MB pro Bild.`);
+                setFileError(
+                    `Ein Bild ist zu groß. Maximal ${fmtKB(bytesToKB(MAX_SIZE))} KB pro Bild.`
+                );
                 valid = false;
                 break;
             }
