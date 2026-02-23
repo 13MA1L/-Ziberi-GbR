@@ -567,6 +567,10 @@ section {
         width: 4px;
         height: 6px;
     }
+
+    .Datenschutz {
+        font-size: x-large;
+    }
 }
 
 .error-message {
@@ -581,6 +585,8 @@ textarea.error {
     border-color: red;
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
+
+<<<<<<< HEAD
 
 /* ===== Upload Zone (Drag & Drop) ===== */
 .upload-zone {
@@ -708,4 +714,10 @@ textarea.error {
 input[type="file"].error {
     border-color: red;
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-}
+
+    =======.footer .credits {
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 0.5em;
+        >>>>>>>d1cdb537187acc5c51e8c157a56cc3d75f2329f1
+    }
